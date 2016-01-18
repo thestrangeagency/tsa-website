@@ -13,6 +13,9 @@ var segments = 64;
 
 var clock = new THREE.Clock();
 
+var motionX = 0;
+var motionY = 0;
+
 init();
 animate();
 
@@ -22,6 +25,8 @@ function init() {
 
   camera = new THREE.PerspectiveCamera( 135, window.innerWidth / window.innerHeight, 1, 2000 );
   camera.position.y = 100;
+
+  motionY = -camera.rotation.x;
 
   scene = new THREE.Scene();
 
@@ -56,6 +61,8 @@ function init() {
 
   window.addEventListener( 'resize', onWindowResize, false );
 
+  if(window.DeviceMotionEvent)
+    window.addEventListener( 'devicemotion', onMotion, false );
 }
 
 function onWindowResize() {
@@ -64,6 +71,15 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
 
   renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+function onMotion(event){
+
+  motionX = motionX * 0.99 + (event.accelerationIncludingGravity.x/2.0) * 0.01;
+  motionY = motionY * 0.99 + (event.accelerationIncludingGravity.y/20.0) * 0.01;
+  camera.rotation.y = motionX;
+  camera.rotation.x = Math.max(-0.7, Math.min(0.3, -motionY)); // -.7 .. .3
 
 }
 
