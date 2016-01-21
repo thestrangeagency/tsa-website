@@ -11,9 +11,36 @@
   var motionY = 0;
 
   init();
-  animate();
 
   function init() {
+    initLogoAnimation();
+    initBackground();
+    animate();
+  }
+
+  function initLogoAnimation() {
+    var logo = document.querySelector('.logo-tsa');
+    var logoStar = document.querySelector('.logo-star');
+
+    logo.addEventListener('mouseover', function() {
+      logo.classList.add('animating');
+    });
+
+    logo.addEventListener('mouseout', function() {
+      logoStar.addEventListener('webkitAnimationIteration', onAnimationIteration);
+      logoStar.addEventListener('MSAnimationIteration', onAnimationIteration);
+      logoStar.addEventListener('animationiteration', onAnimationIteration);
+    });
+
+    function onAnimationIteration() {
+      logo.classList.remove('animating');
+      logoStar.removeEventListener('webkitAnimationIteration', onAnimationIteration);
+      logoStar.removeEventListener('MSAnimationIteration', onAnimationIteration);
+      logoStar.removeEventListener('animationiteration', onAnimationIteration);
+    }
+  }
+
+  function initBackground() {
     container = document.getElementById('container');
     camera = new THREE.PerspectiveCamera(135, window.innerWidth / window.innerHeight, 1, 2000);
     camera.position.y = 100;
