@@ -103,8 +103,9 @@ header {
   position: absolute;
   top: 35px;
   left: 50%;
-  transform: translateX(-50%) rotateY(0deg);
-  transition: all $transition-time;
+  margin-left: -6px;
+  transition: transform $transition-time;
+  -webkit-backface-visibility:hidden;
 }
 
 .links-social {
@@ -139,6 +140,7 @@ header {
   .logo-star {
     width: 25px;
     top: 69px;
+    margin-left: -12px;
   }
 
   .link-block {
@@ -157,6 +159,7 @@ header {
 
 /* Animations */
 @keyframes rotation-y {
-  0% { transform: translateX(-50%) rotateY(0deg); }
-  100% { transform: translateX(-50%) rotateY(180deg); }
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
 }
