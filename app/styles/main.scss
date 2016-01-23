@@ -92,7 +92,7 @@ header {
   &.animating {
 
     & + .logo-star {
-      animation: rotation-y .7s linear forwards infinite;
+      animation: rotation-y .7s linear forwards 1;
     }
   }
 }

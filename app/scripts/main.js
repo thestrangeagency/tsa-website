@@ -24,19 +24,14 @@
 
     logo.addEventListener('mouseover', function() {
       logo.classList.add('animating');
+      logoStar.addEventListener('webkitAnimationEnd', onAnimationEnd);
+      logoStar.addEventListener('animationend', onAnimationEnd);
     });
 
-    logo.addEventListener('mouseout', function() {
-      logoStar.addEventListener('webkitAnimationIteration', onAnimationIteration);
-      logoStar.addEventListener('MSAnimationIteration', onAnimationIteration);
-      logoStar.addEventListener('animationiteration', onAnimationIteration);
-    });
-
-    function onAnimationIteration() {
+    function onAnimationEnd() {
       logo.classList.remove('animating');
-      logoStar.removeEventListener('webkitAnimationIteration', onAnimationIteration);
-      logoStar.removeEventListener('MSAnimationIteration', onAnimationIteration);
-      logoStar.removeEventListener('animationiteration', onAnimationIteration);
+      logoStar.removeEventListener('webkitAnimationEnd', onAnimationEnd);
+      logoStar.removeEventListener('animationend', onAnimationEnd);
     }
   }
 
