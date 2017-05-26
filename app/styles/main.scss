@@ -63,6 +63,10 @@ canvas {
   display: block;
 }
 
+header {
+  position: relative;
+}
+
 .card {
   background-color: #fff;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
@@ -82,9 +86,26 @@ canvas {
   margin: 0 auto;
   width: 50px;
   height: auto;
+  position: relative;
+  z-index: 10;
 
-  &:hover {
+  &.animating {
+
+    & + .logo-star {
+      animation: rotation-y .7s linear forwards 1;
+    }
   }
+}
+
+.logo-star {
+  width: 12px;
+  height: auto;
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  margin-left: -6px;
+  transition: transform $transition-time;
+  -webkit-backface-visibility:hidden;
 }
 
 .links-social {
@@ -116,6 +137,12 @@ canvas {
     width: 100px;
   }
 
+  .logo-star {
+    width: 25px;
+    top: 69px;
+    margin-left: -12px;
+  }
+
   .link-block {
     width: 50%;
     float: left;
@@ -128,4 +155,11 @@ canvas {
       display: block;
     }
   }
+}
+
+/* Animations */
+@keyframes rotation-y {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
 }
